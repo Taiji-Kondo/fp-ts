@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {VFC} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Either from "./pages/either";
 
-function App() {
+const App: VFC = () => {
   return (
     <BrowserRouter>
       <h1>Functional Programing Practice</h1>
