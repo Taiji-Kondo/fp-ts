@@ -1,4 +1,4 @@
-import React, {VFC} from 'react';
+import {VFC} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import Either from "./pages/either";
