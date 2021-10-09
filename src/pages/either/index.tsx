@@ -1,17 +1,8 @@
-import { VFC } from "react";
-import {ProductType} from "../../types/product/ProductType";
-
-const apple: ProductType = {
-  id: 1,
-  name: 'apple',
-  price: 100
-}
+import {VFC} from "react";
+import PageEither from "../../components/Pages/either/PageEither";
 
 const Either: VFC = () => {
-  console.log(apple)
-  return (
-    <div>Either</div>
-  )
+  return <PageEither />
 }
 
 export default Either
