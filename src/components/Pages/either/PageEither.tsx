@@ -1,7 +1,7 @@
 import {useState, VFC} from "react";
 import {ProductType} from "../../../types/product/ProductType";
-import {PRODUCTS} from "../../../constants/Products";
 import {SelectedProductType} from "../../../types/product/SelectedProductType";
+import {ProductList} from "../../either/ProductList";
 
 const PageEither: VFC = () => {
   const [selectedProducts, setSelectedProducts] = useState<SelectedProductType[]>()
@@ -40,21 +40,7 @@ const PageEither: VFC = () => {
         <h2 style={{borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0'}}>Products</h2>
         <div style={{display: 'flex'}}>
           <div style={{width: '80%'}}>
-            <ul style={{display: 'flex'}}>
-              {
-                PRODUCTS.map((product) => {
-                  return (
-                    <li key={product.id} style={{width: '33.33%'}}>
-                      <article>
-                        <h1>NAME: {product.name}</h1>
-                        <span>PRICE: {product.price}</span>
-                        <button type="button" onClick={() => addProduct(product)}>ADD</button>
-                      </article>
-                    </li>
-                  )
-                })
-              }
-            </ul>
+            <ProductList onClickAddButton={addProduct} />
           </div>
           {
             selectedProducts &&
