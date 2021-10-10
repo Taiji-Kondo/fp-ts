@@ -2,6 +2,7 @@ import {useState, VFC} from "react";
 import {ProductType} from "../../../types/product/ProductType";
 import {SelectedProductType} from "../../../types/product/SelectedProductType";
 import {ProductList} from "../../either/ProductList";
+import {CartList} from "../../either/CartList";
 
 const PageEither: VFC = () => {
   const [selectedProducts, setSelectedProducts] = useState<SelectedProductType[]>()
@@ -45,17 +46,7 @@ const PageEither: VFC = () => {
           {
             selectedProducts &&
             <div style={{width: '20%', height: '100vh', borderLeft: '1px solid'}}>
-              <ul>
-                {
-                  selectedProducts.map(({ id, name, selectedCount }) => {
-                    return (
-                      <li key={id}>
-                        <p>{name} x{selectedCount}</p>
-                      </li>
-                    )
-                  })
-                }
-              </ul>
+              <CartList selectedProducts={selectedProducts} />
             </div>
           }
         </div>
