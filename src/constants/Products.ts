@@ -11,7 +11,7 @@ const ORANGE: ProductType = {
   price: 80
 }
 const BANANA: ProductType = {
-  id: 1,
+  id: 3,
   name: 'banana',
   price: 200
 }
