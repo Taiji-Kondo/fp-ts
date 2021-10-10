@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import {useState, VFC} from "react";
 import {ProductType} from "../../../types/product/ProductType";
 
 const apple: ProductType = {
@@ -8,7 +8,13 @@ const apple: ProductType = {
 }
 
 const PageEither: VFC = () => {
-  console.log(apple)
+  const [products, setProducts] = useState<ProductType[]>()
+
+  const findSpecifiedCountOfProducts = ({ id }: Pick<ProductType, 'id'>): number => {
+    const specifiedProducts = products?.filter((product) => product.id === id)
+    return specifiedProducts ? specifiedProducts.length : 0
+  }
+
   return (
     <div>Issuance of statement</div>
   )
