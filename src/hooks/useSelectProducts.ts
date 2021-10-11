@@ -24,12 +24,12 @@ export const useSelectProducts = () => {
     }
   }, [selectedProducts])
 
-  const getSpecifiedProduct = useCallback((product: ProductType): SelectedProductType | null => {
+  const getSpecifiedProduct = (product: ProductType): SelectedProductType | null => {
     const selectedProduct = selectedProducts!.find(
       (selectedProduct) => selectedProduct.id === product.id
     )
     return selectedProduct ?? null
-  }, [selectedProducts])
+  }
 
   return [selectedProducts, addProduct] as const
 }
