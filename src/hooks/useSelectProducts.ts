@@ -24,6 +24,18 @@ export const useSelectProducts = () => {
     }
   }, [selectedProducts])
 
+  const removeProduct = useCallback((product: ProductType): void => {
+    // 商品がカートにない場合は削除ボタンはでないので
+    const removeCountProducts = selectedProducts!.map((selectedProduct) => {
+      if (selectedProduct.id !== product.id) return selectedProduct
+      return {...selectedProduct, selectedCount: selectedProduct.selectedCount - 1}
+    })
+
+    const formatProducts = removeCountProducts.filter(
+      (formatProduct) => formatProduct.selectedCount >= 1)
+    setSelectedProducts(formatProducts)
+  }, [selectedProducts])
+
   const getSpecifiedProduct = (product: ProductType): SelectedProductType | null => {
     const selectedProduct = selectedProducts!.find(
       (selectedProduct) => selectedProduct.id === product.id
@@ -31,6 +43,6 @@ export const useSelectProducts = () => {
     return selectedProduct ?? null
   }
 
-  return [selectedProducts, addProduct] as const
+  return [selectedProducts, {addProduct, removeProduct}] as const
 }
 
