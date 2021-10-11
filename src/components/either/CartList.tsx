@@ -1,11 +1,11 @@
-import {VFC} from "react";
+import {memo, VFC} from "react";
 import {SelectedProductType} from "../../types/product/SelectedProductType";
 
 type CartListPropsType = {
   selectedProducts: SelectedProductType[]
 }
 
-export const CartList: VFC<CartListPropsType> = ({ selectedProducts }) => {
+export const CartList: VFC<CartListPropsType> = memo(({ selectedProducts }) => {
   return (
     <ul>
       {
@@ -19,4 +19,4 @@ export const CartList: VFC<CartListPropsType> = ({ selectedProducts }) => {
       }
     </ul>
   )
-}
+})

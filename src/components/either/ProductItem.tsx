@@ -1,4 +1,4 @@
-import {VFC} from "react";
+import {memo, VFC} from "react";
 import {ProductType} from "../../types/product/ProductType";
 
 type ProductItemPropsType = {
@@ -6,7 +6,7 @@ type ProductItemPropsType = {
   onClickAddButton: (product: ProductType) => void
 }
 
-export const ProductItem: VFC<ProductItemPropsType> = ({ product, onClickAddButton }) => {
+export const ProductItem: VFC<ProductItemPropsType> = memo(({ product, onClickAddButton }) => {
   return (
     <article>
       <h1>NAME: {product.name}</h1>
@@ -14,4 +14,4 @@ export const ProductItem: VFC<ProductItemPropsType> = ({ product, onClickAddButt
       <button type="button" onClick={() => onClickAddButton(product)}>ADD</button>
     </article>
   )
-}
+})

@@ -1,11 +1,11 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import {SelectedProductType} from "../types/product/SelectedProductType";
 import {ProductType} from "../types/product/ProductType";
 
 export const useSelectProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState<SelectedProductType[]>()
 
-  const addProduct = (product: ProductType): void => {
+  const addProduct = useCallback((product: ProductType): void => {
     if (selectedProducts) {
       const specifiedProduct = getSpecifiedProduct(product)
       if (specifiedProduct) {
@@ -22,14 +22,14 @@ export const useSelectProducts = () => {
       const addCountProduct = {...product, selectedCount: 1}
       setSelectedProducts([addCountProduct])
     }
-  }
+  }, [selectedProducts])
 
-  const getSpecifiedProduct = (product: ProductType): SelectedProductType | null => {
+  const getSpecifiedProduct = useCallback((product: ProductType): SelectedProductType | null => {
     const selectedProduct = selectedProducts!.find(
       (selectedProduct) => selectedProduct.id === product.id
     )
     return selectedProduct ?? null
-  }
+  }, [selectedProducts])
 
   return [selectedProducts, addProduct] as const
 }
