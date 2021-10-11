@@ -4,7 +4,7 @@ import {CartList} from "../../either/CartList";
 import {useSelectProducts} from "../../../hooks/useSelectProducts";
 
 const PageEither: VFC = () => {
-  const [selectedProducts, addProduct] = useSelectProducts()
+  const [selectedProducts, {addProduct, removeProduct}] = useSelectProducts()
 
   return (
     <>
@@ -19,7 +19,7 @@ const PageEither: VFC = () => {
           {
             selectedProducts &&
             <div style={{width: '20%', height: '100vh', borderLeft: '1px solid'}}>
-              <CartList selectedProducts={selectedProducts} />
+              <CartList selectedProducts={selectedProducts} onClickRemoveButton={removeProduct} />
             </div>
           }
         </div>
