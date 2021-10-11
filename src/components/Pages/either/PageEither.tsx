@@ -8,10 +8,10 @@ const PageEither: VFC = () => {
 
   return (
     <>
-      <div>Issuance of statement</div>
+      <h2>Issuance of statement</h2>
 
       <div>
-        <h2 style={{borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0'}}>Products</h2>
+        <h3 style={{borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0'}}>Products</h3>
         <div style={{display: 'flex'}}>
           <div style={{width: '80%'}}>
             <ProductList onClickAddButton={addProduct} />
