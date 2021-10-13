@@ -17,7 +17,7 @@ const PageEither: VFC = () => {
             <ProductList onClickAddButton={addProduct} />
           </div>
           {
-            selectedProducts &&
+            selectedProducts.length &&
             <div style={{width: '20%', height: '100vh', borderLeft: '1px solid'}}>
               <CartList selectedProducts={selectedProducts} onClickRemoveButton={removeProduct} />
             </div>
