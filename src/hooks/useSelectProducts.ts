@@ -37,11 +37,8 @@ export const useSelectProducts = () => {
         if (selectedProduct.id !== id) return selectedProduct
 
         // 既にカートに存在する=selectedCountが存在するのでnon-null
-        if(operator) {
-          return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
-        } else {
-          return {...selectedProduct, selectedCount: selectedProduct.selectedCount! - 1}
-        }
+        const selectedCount = operator ? (selectedProduct.selectedCount! + 1) : (selectedProduct.selectedCount! - 1)
+        return {...selectedProduct, selectedCount}
       })
     }
   }
