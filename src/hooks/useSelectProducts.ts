@@ -34,12 +34,10 @@ export const useSelectProducts = () => {
     setSelectedProducts(formatProducts)
   }, [selectedProducts])
 
-  const getSpecifiedProduct = (product: ProductType): Option<ProductType> => {
-    const selectedProduct = selectedProducts.find(
+  const getSpecifiedProduct = (product: ProductType): Option<ProductType> =>
+    fromNullable(selectedProducts.find(
       (selectedProduct) => selectedProduct.id === product.id
-    )
-    return fromNullable(selectedProduct)
-  }
+    ))
 
   return [selectedProducts, {addProduct, removeProduct}] as const
 }
