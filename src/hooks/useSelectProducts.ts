@@ -11,11 +11,7 @@ export const useSelectProducts = () => {
       const addCountProduct = {...product, selectedCount: 1}
       setSelectedProducts([...selectedProducts, addCountProduct])
     }, (specified: ProductType) => {
-      const addCountProducts = selectedProducts.map((selectedProduct) => {
-        if (selectedProduct.id !== specified.id) return selectedProduct
-        // 既にカートに存在する=selectedCountが存在するのでnon-null
-        return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
-      })
+      const addCountProducts = addSelectedCount()(specified.id)
       setSelectedProducts(addCountProducts)
     })(specifiedProduct)
   }, [selectedProducts])
@@ -38,6 +34,23 @@ export const useSelectProducts = () => {
     fromNullable(selectedProducts.find(
       (selectedProduct) => selectedProduct.id === product.id
     ))
+
+  // const addSelectedCount = (productions: ProductType[], specifiedProductId: number): ProductType[] => {
+  //   return productions.map((selectedProduct) => {
+  //     if (selectedProduct.id !== specifiedProductId) return selectedProduct
+  //     // 既にカートに存在する=selectedCountが存在するのでnon-null
+  //     return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
+  //   })
+  // }
+  const addSelectedCount = (productions: ProductType[] = selectedProducts): (specifiedProductId: number) => ProductType[] => {
+    return (specifiedProductId: number) => {
+      return productions.map((selectedProduct) => {
+        if (selectedProduct.id !== specifiedProductId) return selectedProduct
+        // 既にカートに存在する=selectedCountが存在するのでnon-null
+        return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
+      })
+    }
+  }
 
   return [selectedProducts, {addProduct, removeProduct}] as const
 }
