@@ -35,13 +35,6 @@ export const useSelectProducts = () => {
       (selectedProduct) => selectedProduct.id === product.id
     ))
 
-  // const addSelectedCount = (productions: ProductType[], specifiedProductId: number): ProductType[] => {
-  //   return productions.map((selectedProduct) => {
-  //     if (selectedProduct.id !== specifiedProductId) return selectedProduct
-  //     // 既にカートに存在する=selectedCountが存在するのでnon-null
-  //     return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
-  //   })
-  // }
   const addSelectedCount = (productions: ProductType[] = selectedProducts): (specifiedProductId: number) => ProductType[] => {
     return (specifiedProductId: number) => {
       return productions.map((selectedProduct) => {
