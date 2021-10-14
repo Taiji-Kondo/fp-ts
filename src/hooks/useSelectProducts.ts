@@ -11,19 +11,14 @@ export const useSelectProducts = () => {
       const addCountProduct = {...product, selectedCount: 1}
       setSelectedProducts([...selectedProducts, addCountProduct])
     }, (specified: ProductType) => {
-      const addCountProducts = addSelectedCount()(specified.id)
+      const addCountProducts = calcSelectedCount()(specified, true)
       setSelectedProducts(addCountProducts)
     })(specifiedProduct)
   }, [selectedProducts])
 
   const removeProduct = useCallback((product: ProductType): void => {
     // 商品がカートにない場合は削除ボタンはでない
-    const removeCountProducts = selectedProducts.map((selectedProduct) => {
-      if (selectedProduct.id !== product.id) return selectedProduct
-      // カートに存在する=selectedCountが存在するのでnon-null
-      return {...selectedProduct, selectedCount: selectedProduct.selectedCount! - 1}
-    })
-
+    const removeCountProducts = calcSelectedCount()(product, false)
     const formatProducts = removeCountProducts.filter(
       // カートに存在する=selectedCountが存在するのでnon-null
       (formatProduct) => formatProduct.selectedCount! >= 1)
@@ -35,12 +30,18 @@ export const useSelectProducts = () => {
       (selectedProduct) => selectedProduct.id === product.id
     ))
 
-  const addSelectedCount = (productions: ProductType[] = selectedProducts): (specifiedProductId: number) => ProductType[] => {
-    return (specifiedProductId: number) => {
+  const calcSelectedCount = (productions: ProductType[] = selectedProducts) => {
+    // operator ? increment : decrement
+    return ({ id }: ProductType, operator: boolean) => {
       return productions.map((selectedProduct) => {
-        if (selectedProduct.id !== specifiedProductId) return selectedProduct
+        if (selectedProduct.id !== id) return selectedProduct
+
         // 既にカートに存在する=selectedCountが存在するのでnon-null
-        return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
+        if(operator) {
+          return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
+        } else {
+          return {...selectedProduct, selectedCount: selectedProduct.selectedCount! - 1}
+        }
       })
     }
   }
