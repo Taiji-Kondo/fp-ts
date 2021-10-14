@@ -1,6 +1,8 @@
 import {useCallback, useState} from "react";
 import {ProductType} from "../types/product/ProductType";
 import { Option, fold, fromNullable } from 'fp-ts/Option';
+import {filter, map} from 'fp-ts/lib/Array';
+import { pipe } from 'fp-ts/function'
 
 export const useSelectProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([])
@@ -17,12 +19,7 @@ export const useSelectProducts = () => {
   }, [selectedProducts])
 
   const removeProduct = useCallback((product: ProductType): void => {
-    // 商品がカートにない場合は削除ボタンはでない
-    const removeCountProducts = calcSelectedCount()(product, false)
-    const formatProducts = removeCountProducts.filter(
-      // カートに存在する=selectedCountが存在するのでnon-null
-      (formatProduct) => formatProduct.selectedCount! >= 1)
-    setSelectedProducts(formatProducts)
+    setSelectedProducts(removedSelectedCountProduct(product))
   }, [selectedProducts])
 
   const getSpecifiedProduct = (product: ProductType): Option<ProductType> =>
@@ -33,15 +30,25 @@ export const useSelectProducts = () => {
   const calcSelectedCount = (productions: ProductType[] = selectedProducts) => {
     // operator ? increment : decrement
     return ({ id }: ProductType, operator: boolean) => {
-      return productions.map((selectedProduct) => {
+      return map((selectedProduct: ProductType) => {
         if (selectedProduct.id !== id) return selectedProduct
 
         // 既にカートに存在する=selectedCountが存在するのでnon-null
         const selectedCount = operator ? (selectedProduct.selectedCount! + 1) : (selectedProduct.selectedCount! - 1)
         return {...selectedProduct, selectedCount}
-      })
+      })(productions)
     }
   }
+
+  // 変更したい商品を引数にとって新しい商品一覧を返す
+  const removedSelectedCountProduct = (product: ProductType): ProductType[] => pipe(
+    calcSelectedCount()(product, false),
+    removeZeroSelectedCountProduct
+  )
+
+  // 商品数が0の商品を取り除いた配列を返す
+  const removeZeroSelectedCountProduct = filter<ProductType>(
+    (product: ProductType) => product.selectedCount! >= 1)
 
   return [selectedProducts, {addProduct, removeProduct}] as const
 }
