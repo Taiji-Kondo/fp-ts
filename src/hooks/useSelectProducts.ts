@@ -8,26 +8,26 @@ export const useSelectProducts = () => {
   const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([])
 
   const addProduct = useCallback((product: ProductType): void => {
-    const specifiedProduct = getSpecifiedProduct(product)
+    const specifiedProduct = _getSpecifiedProduct(product)
     fold(() => {
       const addCountProduct = {...product, selectedCount: 1}
       setSelectedProducts([...selectedProducts, addCountProduct])
     }, (specified: ProductType) => {
-      const addCountProducts = calcSelectedCount()(specified, true)
+      const addCountProducts = _calcSelectedCount()(specified, true)
       setSelectedProducts(addCountProducts)
     })(specifiedProduct)
   }, [selectedProducts])
 
   const removeProduct = useCallback((product: ProductType): void => {
-    setSelectedProducts(removedSelectedCountProduct(product))
+    setSelectedProducts(_removedSelectedCountProduct(product))
   }, [selectedProducts])
 
-  const getSpecifiedProduct = (product: ProductType): Option<ProductType> =>
+  const _getSpecifiedProduct = (product: ProductType): Option<ProductType> =>
     fromNullable(selectedProducts.find(
       (selectedProduct) => selectedProduct.id === product.id
     ))
 
-  const calcSelectedCount = (productions: ProductType[] = selectedProducts) => {
+  const _calcSelectedCount = (productions: ProductType[] = selectedProducts) => {
     // operator ? increment : decrement
     return ({ id }: ProductType, operator: boolean) => {
       return map((selectedProduct: ProductType) => {
@@ -41,13 +41,13 @@ export const useSelectProducts = () => {
   }
 
   // 変更したい商品を引数にとって新しい商品一覧を返す
-  const removedSelectedCountProduct = (product: ProductType): ProductType[] => pipe(
-    calcSelectedCount()(product, false),
-    removeZeroSelectedCountProduct
+  const _removedSelectedCountProduct = (product: ProductType): ProductType[] => pipe(
+    _calcSelectedCount()(product, false),
+    _removeZeroSelectedCountProduct
   )
 
   // 商品数が0の商品を取り除いた配列を返す
-  const removeZeroSelectedCountProduct = filter<ProductType>(
+  const _removeZeroSelectedCountProduct = filter<ProductType>(
     (product: ProductType) => product.selectedCount! >= 1)
 
   return [selectedProducts, {addProduct, removeProduct}] as const
