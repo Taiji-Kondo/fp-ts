@@ -1,9 +1,8 @@
 import {memo, VFC} from "react";
-import {SelectedProductType} from "../../types/product/SelectedProductType";
 import {ProductType} from "../../types/product/ProductType";
 
 type CartListPropsType = {
-  selectedProducts: SelectedProductType[]
+  selectedProducts: ProductType[]
   onClickRemoveButton: (product: ProductType) => void
 }
 

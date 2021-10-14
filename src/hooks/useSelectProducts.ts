@@ -1,16 +1,16 @@
 import {useCallback, useState} from "react";
-import {SelectedProductType} from "../types/product/SelectedProductType";
 import {ProductType} from "../types/product/ProductType";
 
 export const useSelectProducts = () => {
-  const [selectedProducts, setSelectedProducts] = useState<SelectedProductType[]>([])
+  const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([])
 
   const addProduct = useCallback((product: ProductType): void => {
     const specifiedProduct = getSpecifiedProduct(product)
     if (specifiedProduct) {
       const addCountProducts = selectedProducts.map((selectedProduct) => {
         if (selectedProduct.id !== specifiedProduct.id) return selectedProduct
-        return {...selectedProduct, selectedCount: selectedProduct.selectedCount + 1}
+        // 既にカートに存在する=selectedCountが存在するのでnon-null
+        return {...selectedProduct, selectedCount: selectedProduct.selectedCount! + 1}
       })
       setSelectedProducts(addCountProducts)
     } else {
@@ -20,18 +20,20 @@ export const useSelectProducts = () => {
   }, [selectedProducts])
 
   const removeProduct = useCallback((product: ProductType): void => {
-    // 商品がカートにない場合は削除ボタンはでないので
+    // 商品がカートにない場合は削除ボタンはでない
     const removeCountProducts = selectedProducts.map((selectedProduct) => {
       if (selectedProduct.id !== product.id) return selectedProduct
-      return {...selectedProduct, selectedCount: selectedProduct.selectedCount - 1}
+      // カートに存在する=selectedCountが存在するのでnon-null
+      return {...selectedProduct, selectedCount: selectedProduct.selectedCount! - 1}
     })
 
     const formatProducts = removeCountProducts.filter(
-      (formatProduct) => formatProduct.selectedCount >= 1)
+      // カートに存在する=selectedCountが存在するのでnon-null
+      (formatProduct) => formatProduct.selectedCount! >= 1)
     setSelectedProducts(formatProducts)
   }, [selectedProducts])
 
-  const getSpecifiedProduct = (product: ProductType): SelectedProductType | null => {
+  const getSpecifiedProduct = (product: ProductType): ProductType | null => {
     const selectedProduct = selectedProducts.find(
       (selectedProduct) => selectedProduct.id === product.id
     )
