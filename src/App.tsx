@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Product from "./pages/product";
 import Cart from "./pages/product/cart";
 import {RecoilRoot} from "recoil";
+import LayoutBase from "./layouts/LayoutBase";
 
 const App: VFC = () => {
   return (
@@ -19,10 +20,14 @@ const App: VFC = () => {
             render={({ match: { url } }) => (
               <Switch>
                 <Route exact path={url}>
-                  <Product />
+                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product'>
+                    <Product />
+                  </LayoutBase>
                 </Route>
                 <Route path={`${url}/cart`}>
-                  <Cart />
+                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Cart'>
+                    <Cart />
+                  </LayoutBase>
                 </Route>
               </Switch>
             )}
