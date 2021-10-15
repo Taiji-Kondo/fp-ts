@@ -1,19 +1,22 @@
 import {VFC} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
 
 import Product from "./pages/product";
 import Cart from "./pages/product/cart";
 import {RecoilRoot} from "recoil";
 import LayoutBase from "./layouts/LayoutBase";
+import Home from "./pages/Home";
 
 const App: VFC = () => {
   return (
     <RecoilRoot>
       <BrowserRouter>
-        <h1>Functional Programing Practice</h1>
+        <h1>
+          <Link to='/'>Functional Programing Practice</Link>
+        </h1>
         <Switch>
           <Route exact path="/">
-            TOP
+            <Home />
           </Route>
           <Route
             path="/product"
