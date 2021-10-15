@@ -19,11 +19,13 @@ export const useSelectProducts = () => {
   const _addedSelectedCountProduct = (product: ProductType) => pipe(
     _getSpecifiedProduct()(product),
     fold(() => {
-      const addCountProduct = {...product, selectedCount: 1}
-      return [...selectedProducts, addCountProduct]
-    }, (specified: ProductType) => {
-      return _calcSelectedCount()(specified, true)
-    })
+        const addCountProduct = {...product, selectedCount: 1}
+        return [...selectedProducts, addCountProduct]
+      },
+      (specified: ProductType) => {
+        return _calcSelectedCount()(specified, true)
+      }
+    )
   )
 
   // 商品数をマイナスしたい商品を引数にとって新しい商品一覧を返す
