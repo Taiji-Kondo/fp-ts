@@ -2,6 +2,7 @@ import {VFC} from "react";
 import {ProductList} from "../../product/ProductList";
 import {CartList} from "../../product/CartList";
 import {useSelectProducts} from "../../../hooks/useSelectProducts";
+import {Link} from "react-router-dom";
 
 const PageProduct: VFC = () => {
   const [carts, {addCart}] = useSelectProducts()
@@ -15,6 +16,14 @@ const PageProduct: VFC = () => {
         <div style={{display: 'flex'}}>
           <div style={{width: '80%'}}>
             <ProductList onClickAddButton={addCart} />
+
+            <div style={{marginTop: '100px'}}>
+              <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <Link to='/product/cart'>
+                  <button type='button'>BUY</button>
+                </Link>
+              </div>
+            </div>
           </div>
           {
             carts.length ?

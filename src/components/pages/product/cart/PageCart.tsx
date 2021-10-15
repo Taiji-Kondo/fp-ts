@@ -1,8 +1,9 @@
 import {VFC} from "react";
+import {CartList} from "../../../product/CartList";
 
 const PageCart: VFC = () => {
   return (
-    <>cart</>
+    <CartList />
   )
 }
 
