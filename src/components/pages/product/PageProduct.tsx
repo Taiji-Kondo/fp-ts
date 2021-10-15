@@ -1,9 +1,9 @@
 import {VFC} from "react";
-import {ProductList} from "../../either/ProductList";
-import {CartList} from "../../either/CartList";
+import {ProductList} from "../../product/ProductList";
+import {CartList} from "../../product/CartList";
 import {useSelectProducts} from "../../../hooks/useSelectProducts";
 
-const PageEither: VFC = () => {
+const PageProduct: VFC = () => {
   const [selectedProducts, {addProduct, removeProduct}] = useSelectProducts()
 
   return (
@@ -28,4 +28,4 @@ const PageEither: VFC = () => {
   )
 }
 
-export default PageEither
+export default PageProduct

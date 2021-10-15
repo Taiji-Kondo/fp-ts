@@ -1,7 +1,7 @@
 import {VFC} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Either from "./pages/either";
+import Either from "./pages/product";
 
 const App: VFC = () => {
   return (
