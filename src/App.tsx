@@ -1,7 +1,8 @@
 import {VFC} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Either from "./pages/product";
+import Product from "./pages/product";
+import Cart from "./pages/product/cart";
 
 const App: VFC = () => {
   return (
@@ -11,9 +12,19 @@ const App: VFC = () => {
         <Route exact path="/">
           TOP
         </Route>
-        <Route path="/either">
-          <Either />
-        </Route>
+        <Route
+          path="/product"
+          render={({ match: { url } }) => (
+            <Switch>
+              <Route exact path={url}>
+                <Product />
+              </Route>
+              <Route path={`${url}/cart`}>
+                <Cart />
+              </Route>
+            </Switch>
+          )}
+        />
       </Switch>
     </BrowserRouter>
   );

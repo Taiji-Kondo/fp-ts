@@ -1,8 +1,8 @@
 import {VFC} from "react";
 import PageProduct from "../../components/pages/product/PageProduct";
 
-const Either: VFC = () => {
+const Product: VFC = () => {
   return <PageProduct />
 }
 
-export default Either
+export default Product

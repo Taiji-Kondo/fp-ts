@@ -1,4 +1,5 @@
 import {memo, VFC} from "react";
+import { Link } from 'react-router-dom'
 import {ProductType} from "../../types/product/ProductType";
 
 type CartListPropsType = {
@@ -10,7 +11,9 @@ export const CartList: VFC<CartListPropsType> = memo(({ selectedProducts, onClic
   return (
     <div style={{marginTop: "20px"}}>
       <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <button type='button'>BUY</button>
+        <Link to='/product/cart'>
+          <button type='button'>BUY</button>
+        </Link>
       </div>
       <ul>
         {
