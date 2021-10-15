@@ -1,26 +1,28 @@
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 import {ProductType} from "../types/product/ProductType";
 import { fold, fromNullable } from 'fp-ts/Option';
 import {filter, map} from 'fp-ts/lib/Array';
 import { pipe } from 'fp-ts/function'
+import { useRecoilState } from "recoil";
+import {cartState} from "../stores/atoms/cartState";
 
 export const useSelectProducts = () => {
-  const [selectedProducts, setSelectedProducts] = useState<ProductType[]>([])
+  const [cart, setCart] = useRecoilState(cartState)
 
-  const addProduct = useCallback((product: ProductType): void => {
-    setSelectedProducts(_addedSelectedCountProduct(product))
-  }, [selectedProducts])
+  const addCart = useCallback((product: ProductType): void => {
+    setCart(_addedSelectedCountProduct(product))
+  }, [cart])
 
-  const removeProduct = useCallback((product: ProductType): void => {
-    setSelectedProducts(_removedSelectedCountProduct(product))
-  }, [selectedProducts])
+  const removeCart = useCallback((product: ProductType): void => {
+    setCart(_removedSelectedCountProduct(product))
+  }, [cart])
 
   // 商品数をプラスしたい商品を引数にとって新しい商品一覧を返す
   const _addedSelectedCountProduct = (product: ProductType) => pipe(
     _getSpecifiedProduct()(product),
     fold(() => {
         const addCountProduct = {...product, selectedCount: 1}
-        return [...selectedProducts, addCountProduct]
+        return [...cart, addCountProduct]
       },
       (specified: ProductType) => {
         return _calcSelectedCount()(specified, true)
@@ -35,13 +37,13 @@ export const useSelectProducts = () => {
   )
 
   // 該当する商品が存在するか検索する
-  const _getSpecifiedProduct = (productions: ProductType[] = selectedProducts) => {
+  const _getSpecifiedProduct = (productions: ProductType[] = cart) => {
     return (product: ProductType) => fromNullable(productions.find(
       (selectedProduct) => selectedProduct.id === product.id
     ))
   }
 
-  const _calcSelectedCount = (productions: ProductType[] = selectedProducts) => {
+  const _calcSelectedCount = (productions: ProductType[] = cart) => {
     // operator ? increment : decrement
     return ({ id }: ProductType, operator: boolean) => {
       return map((selectedProduct: ProductType) => {
@@ -58,6 +60,6 @@ export const useSelectProducts = () => {
   const _removeZeroSelectedCountProduct = filter<ProductType>(
     (product: ProductType) => product.selectedCount! >= 1)
 
-  return [selectedProducts, {addProduct, removeProduct}] as const
+  return [cart, {addCart, removeCart}] as const
 }
 

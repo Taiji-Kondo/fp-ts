@@ -1,8 +1,8 @@
 import {VFC} from "react";
 import PageCart from "../../../components/pages/product/cart/PageCart";
 
-const Either: VFC = () => {
-  return <PageCart />
+const Cart: VFC = () => {
+  return <PageCart/>
 }
 
-export default Either
+export default Cart

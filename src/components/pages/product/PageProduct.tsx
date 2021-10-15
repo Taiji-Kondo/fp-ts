@@ -4,7 +4,7 @@ import {CartList} from "../../product/CartList";
 import {useSelectProducts} from "../../../hooks/useSelectProducts";
 
 const PageProduct: VFC = () => {
-  const [selectedProducts, {addProduct, removeProduct}] = useSelectProducts()
+  const [cart, {addCart, removeCart}] = useSelectProducts()
 
   return (
     <>
@@ -14,12 +14,12 @@ const PageProduct: VFC = () => {
         <h3 style={{borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0'}}>Products</h3>
         <div style={{display: 'flex'}}>
           <div style={{width: '80%'}}>
-            <ProductList onClickAddButton={addProduct} />
+            <ProductList onClickAddButton={addCart} />
           </div>
           {
-            selectedProducts.length ?
+            cart.length ?
             <div style={{width: '20%', height: '100vh', borderLeft: '1px solid'}}>
-              <CartList selectedProducts={selectedProducts} onClickRemoveButton={removeProduct} />
+              <CartList selectedProducts={cart} onClickRemoveButton={removeCart} />
             </div> : null
           }
         </div>
