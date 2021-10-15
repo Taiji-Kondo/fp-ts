@@ -1,11 +1,13 @@
 import {memo, VFC} from "react";
 import {useSelectProducts} from "../../hooks/useSelectProducts";
 import {ShowButtonType} from "../../types/ShowButtonType";
+import {useCalcCart} from "../../hooks/useCalcCart";
 
 type CartListPropsType = ShowButtonType
 
 export const CartList: VFC<Partial<CartListPropsType>> = memo(({ showAddButton = true, showRemoveButton = true }) => {
   const [carts, { addCart, removeCart }] = useSelectProducts()
+  const [result] = useCalcCart()
 
   return (
     <>
@@ -26,6 +28,7 @@ export const CartList: VFC<Partial<CartListPropsType>> = memo(({ showAddButton =
           </ul>
           : <p>Cart is Empty</p>
       }
+      <div>{result}</div>
     </>
   )
 })
