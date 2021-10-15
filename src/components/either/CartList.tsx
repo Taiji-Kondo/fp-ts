@@ -13,7 +13,7 @@ export const CartList: VFC<CartListPropsType> = memo(({ selectedProducts, onClic
         selectedProducts.map((selectedProduct) => {
           return (
             <li key={selectedProduct.id}>
-              <p>{selectedProduct.name} x{selectedProduct.selectedCount}</p>
+              <span>{selectedProduct.name} x{selectedProduct.selectedCount}</span>
               <button onClick={() => onClickRemoveButton(selectedProduct)}>REMOVE</button>
             </li>
           )
