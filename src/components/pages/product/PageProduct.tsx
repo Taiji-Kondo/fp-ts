@@ -19,7 +19,7 @@ const PageProduct: VFC = () => {
           {
             carts.length ?
             <div style={{width: '20%', height: '100vh', borderLeft: '1px solid'}}>
-              <CartList />
+              <CartList showAddButton={false} />
             </div> : null
           }
         </div>
