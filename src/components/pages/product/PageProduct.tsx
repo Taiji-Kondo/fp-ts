@@ -14,9 +14,7 @@ const PageProduct: VFC = () => {
 
         <div style={{marginTop: '100px'}}>
           <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-            <Link to='/product/cart'>
-              <button type='button'>BUY</button>
-            </Link>
+            <Link to='/product/cart'>BUY</Link>
           </div>
         </div>
       </div>
