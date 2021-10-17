@@ -1,5 +1,5 @@
 import {VFC} from "react";
-import { useParams } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import {PRODUCTS} from "../../../../constants/Products";
 
 const PageProductDetail: VFC = () => {
@@ -21,6 +21,7 @@ const PageProductDetail: VFC = () => {
             <dd>{selectedProduct.detail.evaluation}</dd>
           </dl> : <p>This product is not found.</p>
       }
+      <Link to='/product'>BACK</Link>
     </article>
   )
 }
