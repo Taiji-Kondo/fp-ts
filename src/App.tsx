@@ -6,6 +6,7 @@ import Cart from "./pages/product/cart";
 import {RecoilRoot} from "recoil";
 import LayoutBase from "./layouts/LayoutBase";
 import Home from "./pages/Home";
+import ProductDetail from "./pages/product/detail";
 
 const App: VFC = () => {
   return (
@@ -25,6 +26,11 @@ const App: VFC = () => {
                 <Route exact path={url}>
                   <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product'>
                     <Product />
+                  </LayoutBase>
+                </Route>
+                <Route exact path={`${url}/:id`}>
+                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product Detail'>
+                    <ProductDetail />
                   </LayoutBase>
                 </Route>
                 <Route path={`${url}/cart`}>
