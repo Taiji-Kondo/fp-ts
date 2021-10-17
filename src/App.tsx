@@ -28,14 +28,14 @@ const App: VFC = () => {
                     <Product />
                   </LayoutBase>
                 </Route>
-                <Route path={`${url}/:id`}>
-                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product Detail'>
-                    <ProductDetail />
-                  </LayoutBase>
-                </Route>
                 <Route path={`${url}/cart`}>
                   <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Cart'>
                     <Cart />
+                  </LayoutBase>
+                </Route>
+                <Route path={`${url}/:id`}>
+                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product Detail'>
+                    <ProductDetail />
                   </LayoutBase>
                 </Route>
               </Switch>
