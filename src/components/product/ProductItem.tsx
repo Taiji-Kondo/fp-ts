@@ -1,4 +1,5 @@
 import {memo, VFC} from "react";
+import { Link } from "react-router-dom";
 import {ProductType} from "../../types/product/ProductType";
 
 type ProductItemPropsType = {
@@ -14,6 +15,9 @@ export const ProductItem: VFC<ProductItemPropsType> = memo(({ product, onClickAd
       <span>PRICE: {product.price}</span>
       {onClickAddButton &&<button type="button" onClick={() => onClickAddButton(product)}>ADD</button>}
       {onClickRemoveButton &&<button type="button" onClick={() => onClickRemoveButton(product)}>REMOVE</button>}
+      <div>
+        <Link to={`/product/${product.id}`}>Show Detail</Link>
+      </div>
     </article>
   )
 })
