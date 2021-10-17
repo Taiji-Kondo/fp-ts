@@ -28,7 +28,7 @@ const App: VFC = () => {
                     <Product />
                   </LayoutBase>
                 </Route>
-                <Route exact path={`${url}/:id`}>
+                <Route path={`${url}/:id`}>
                   <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product Detail'>
                     <ProductDetail />
                   </LayoutBase>
