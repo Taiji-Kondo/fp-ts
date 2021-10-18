@@ -1,12 +1,8 @@
 import {VFC} from 'react';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Link} from 'react-router-dom';
 
-import Product from "./pages/product";
-import Cart from "./pages/product/cart";
 import {RecoilRoot} from "recoil";
-import LayoutBase from "./layouts/LayoutBase";
-import Home from "./pages/Home";
-import ProductDetail from "./pages/product/detail";
+import { Router } from './router/Router';
 
 const App: VFC = () => {
   return (
@@ -15,33 +11,7 @@ const App: VFC = () => {
         <h1>
           <Link to='/'>Functional Programing Practice</Link>
         </h1>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route
-            path="/product"
-            render={({ match: { url } }) => (
-              <Switch>
-                <Route exact path={url}>
-                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product'>
-                    <Product />
-                  </LayoutBase>
-                </Route>
-                <Route path={`${url}/cart`}>
-                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Cart'>
-                    <Cart />
-                  </LayoutBase>
-                </Route>
-                <Route path={`${url}/:id`}>
-                  <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Product Detail'>
-                    <ProductDetail />
-                  </LayoutBase>
-                </Route>
-              </Switch>
-            )}
-          />
-        </Switch>
+        <Router />
       </BrowserRouter>
     </RecoilRoot>
   );
