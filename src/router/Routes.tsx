@@ -19,18 +19,6 @@ type BaseRoutesType = {
 
 export const Routes: RouteType[] = [
   {
-    path: '/',
-    children: [
-      {
-        path: '/',
-        exact: true,
-        title: 'Issuance of statement',
-        subTitle: 'Home',
-        children: <Home />,
-      },
-    ],
-  },
-  {
     path: '/product',
     children: [
       {
@@ -55,5 +43,17 @@ export const Routes: RouteType[] = [
         children: <ProductDetail />,
       },
     ]
+  },
+  {
+    path: '/',
+    children: [
+      {
+        path: '/',
+        exact: true,
+        title: 'Issuance of statement',
+        subTitle: 'Home',
+        children: <Home />,
+      },
+    ],
   },
 ]
