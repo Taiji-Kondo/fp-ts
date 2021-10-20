@@ -3,10 +3,16 @@ import {Route, Switch} from "react-router-dom";
 import {Routes} from "./Routes";
 import LayoutBase from "../layouts/LayoutBase";
 import Page404 from "../pages/Page404";
+import Home from "../pages/Home";
 
 export const Router: VFC = memo(() => {
   return (
     <Switch>
+      <Route path="/" exact>
+        <LayoutBase pageTitle='Issuance of statement' pageSubTitle='Home'>
+          <Home />
+        </LayoutBase>
+      </Route>
       {Routes.map((route) => (
         <Route
           key={route.path}

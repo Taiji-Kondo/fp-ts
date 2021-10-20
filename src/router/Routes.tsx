@@ -1,4 +1,3 @@
-import Home from "../pages/Home";
 import Product from "../pages/product";
 import Cart from "../pages/product/cart";
 import {ReactElement} from "react";
@@ -43,17 +42,5 @@ export const Routes: RouteType[] = [
         children: <ProductDetail />,
       },
     ]
-  },
-  {
-    path: '/',
-    children: [
-      {
-        path: '/',
-        exact: true,
-        title: 'Issuance of statement',
-        subTitle: 'Home',
-        children: <Home />,
-      },
-    ],
   },
 ]
