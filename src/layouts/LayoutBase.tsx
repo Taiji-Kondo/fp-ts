@@ -1,4 +1,4 @@
-import {ReactNode, VFC} from "react";
+import { ReactNode, VFC } from 'react'
 
 type LayoutBasePropsType = {
   pageTitle: string
@@ -12,7 +12,9 @@ const LayoutBase: VFC<LayoutBasePropsType> = ({ pageTitle, pageSubTitle, childre
       <h2>{pageTitle}</h2>
 
       <div>
-        <h3 style={{borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0'}}>{pageSubTitle}</h3>
+        <h3 style={{ borderBottom: '1px solid', paddingBottom: '20px', marginBottom: '0' }}>
+          {pageSubTitle}
+        </h3>
         {children}
       </div>
     </>

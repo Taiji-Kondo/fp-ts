@@ -1,46 +1,51 @@
-import {useCallback} from "react";
-import {ProductType} from "../types/product/ProductType";
-import { fold, fromNullable } from 'fp-ts/Option';
-import {filter, map} from 'fp-ts/lib/Array';
+import { useCallback } from 'react'
+import { ProductType } from '../types/product/ProductType'
+import { fold, fromNullable } from 'fp-ts/Option'
+import { filter, map } from 'fp-ts/lib/Array'
 import { pipe } from 'fp-ts/function'
-import { useRecoilState } from "recoil";
-import {cartsState} from "../stores/atoms/cartState";
+import { useRecoilState } from 'recoil'
+import { cartsState } from '../stores/atoms/cartState'
 
 export const useSelectProducts = () => {
   const [carts, setCarts] = useRecoilState(cartsState)
 
-  const addCart = useCallback((product: ProductType): void => {
-    setCarts(_addedSelectedCountProduct(product))
-  }, [carts])
+  const addCart = useCallback(
+    (product: ProductType): void => {
+      setCarts(_addedSelectedCountProduct(product))
+    },
+    [carts]
+  )
 
-  const removeCart = useCallback((product: ProductType): void => {
-    setCarts(_removedSelectedCountProduct(product))
-  }, [carts])
+  const removeCart = useCallback(
+    (product: ProductType): void => {
+      setCarts(_removedSelectedCountProduct(product))
+    },
+    [carts]
+  )
 
   // 商品数をプラスしたい商品を引数にとって新しい商品一覧を返す
-  const _addedSelectedCountProduct = (product: ProductType) => pipe(
-    _getSpecifiedProduct()(product),
-    fold(() => {
-        const addCountProduct = {...product, selectedCount: 1}
-        return [...carts, addCountProduct]
-      },
-      (specified: ProductType) => {
-        return _calcSelectedCount()(specified, true)
-      }
+  const _addedSelectedCountProduct = (product: ProductType) =>
+    pipe(
+      _getSpecifiedProduct()(product),
+      fold(
+        () => {
+          const addCountProduct = { ...product, selectedCount: 1 }
+          return [...carts, addCountProduct]
+        },
+        (specified: ProductType) => {
+          return _calcSelectedCount()(specified, true)
+        }
+      )
     )
-  )
 
   // 商品数をマイナスしたい商品を引数にとって新しい商品一覧を返す
-  const _removedSelectedCountProduct = (product: ProductType): ProductType[] => pipe(
-    _calcSelectedCount()(product, false),
-    _removeZeroSelectedCountProduct
-  )
+  const _removedSelectedCountProduct = (product: ProductType): ProductType[] =>
+    pipe(_calcSelectedCount()(product, false), _removeZeroSelectedCountProduct)
 
   // 該当する商品が存在するか検索する
   const _getSpecifiedProduct = (productions: ProductType[] = carts) => {
-    return (product: ProductType) => fromNullable(productions.find(
-      (selectedProduct) => selectedProduct.id === product.id
-    ))
+    return (product: ProductType) =>
+      fromNullable(productions.find((selectedProduct) => selectedProduct.id === product.id))
   }
 
   const _calcSelectedCount = (productions: ProductType[] = carts) => {
@@ -50,16 +55,18 @@ export const useSelectProducts = () => {
         if (selectedProduct.id !== id) return selectedProduct
 
         // 既にカートに存在する=selectedCountが存在するのでnon-null
-        const selectedCount = operator ? (selectedProduct.selectedCount! + 1) : (selectedProduct.selectedCount! - 1)
-        return {...selectedProduct, selectedCount}
+        const selectedCount = operator
+          ? selectedProduct.selectedCount! + 1
+          : selectedProduct.selectedCount! - 1
+        return { ...selectedProduct, selectedCount }
       })(productions)
     }
   }
 
   // 商品数が0の商品を取り除いた配列を返す
   const _removeZeroSelectedCountProduct = filter<ProductType>(
-    (product: ProductType) => product.selectedCount! >= 1)
+    (product: ProductType) => product.selectedCount! >= 1
+  )
 
-  return [carts, {addCart, removeCart}] as const
+  return [carts, { addCart, removeCart }] as const
 }
-

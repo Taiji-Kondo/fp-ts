@@ -1,5 +1,5 @@
-import {VFC} from "react";
-import { Link } from "react-router-dom";
+import { VFC } from 'react'
+import { Link } from 'react-router-dom'
 
 const PageHome: VFC = () => {
   return (
@@ -7,7 +7,7 @@ const PageHome: VFC = () => {
       <nav>
         <ul>
           <li>
-            <Link to='/product'>Product</Link>
+            <Link to="/product">Product</Link>
           </li>
         </ul>
       </nav>

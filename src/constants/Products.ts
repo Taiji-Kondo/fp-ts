@@ -1,4 +1,4 @@
-import {ProductType} from "../types/product/ProductType";
+import { ProductType } from '../types/product/ProductType'
 
 const APPLE: ProductType = {
   id: 1,
@@ -6,7 +6,7 @@ const APPLE: ProductType = {
   price: 100,
   detail: {
     description: 'An Apple',
-    evaluation: 4
+    evaluation: 4,
   },
 }
 const ORANGE: ProductType = {
@@ -15,7 +15,7 @@ const ORANGE: ProductType = {
   price: 80,
   detail: {
     description: 'An Orange',
-    evaluation: 3.5
+    evaluation: 3.5,
   },
 }
 const BANANA: ProductType = {
@@ -24,7 +24,7 @@ const BANANA: ProductType = {
   price: 200,
   detail: {
     description: 'Two Banana',
-    evaluation: 1.2
+    evaluation: 1.2,
   },
 }
 

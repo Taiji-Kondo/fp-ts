@@ -1,4 +1,4 @@
 export type ShowButtonType = {
-  showAddButton: boolean,
-  showRemoveButton: boolean,
+  showAddButton: boolean
+  showRemoveButton: boolean
 }

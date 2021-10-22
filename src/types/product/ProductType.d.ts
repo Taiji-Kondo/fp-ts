@@ -1,4 +1,4 @@
-import {ProductDetailType} from "./ProductDetailType";
+import { ProductDetailType } from './ProductDetailType'
 
 export type ProductType = {
   id: number

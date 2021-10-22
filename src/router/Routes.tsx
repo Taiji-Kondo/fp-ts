@@ -1,7 +1,7 @@
-import Product from "../pages/product";
-import Cart from "../pages/product/cart";
-import {ReactElement} from "react";
-import ProductDetail from "../pages/product/detail";
+import Product from '../pages/product'
+import Cart from '../pages/product/cart'
+import { ReactElement } from 'react'
+import ProductDetail from '../pages/product/detail'
 
 export type RouteType = {
   path: string
@@ -41,6 +41,6 @@ export const Routes: RouteType[] = [
         subTitle: 'Product Detail',
         children: <ProductDetail />,
       },
-    ]
+    ],
   },
 ]
