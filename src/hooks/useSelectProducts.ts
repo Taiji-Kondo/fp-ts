@@ -6,13 +6,22 @@ import { pipe } from 'fp-ts/function'
 import { useRecoilState } from 'recoil'
 import { cartsState } from '../stores/atoms/cartState'
 
-export const useSelectProducts = () => {
+type useSelectProductsType = [
+  ProductType[],
+  {
+    addCart: (product: ProductType) => void,
+    removeCart: (product: ProductType) => void
+  }
+]
+
+export const useSelectProducts = (): useSelectProductsType => {
   const [carts, setCarts] = useRecoilState(cartsState)
 
   const addCart = useCallback(
     (product: ProductType): void => {
       setCarts(_addedSelectedCountProduct(product))
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [carts]
   )
 
@@ -20,6 +29,7 @@ export const useSelectProducts = () => {
     (product: ProductType): void => {
       setCarts(_removedSelectedCountProduct(product))
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [carts]
   )
 
@@ -56,7 +66,9 @@ export const useSelectProducts = () => {
 
         // 既にカートに存在する=selectedCountが存在するのでnon-null
         const selectedCount = operator
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           ? selectedProduct.selectedCount! + 1
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           : selectedProduct.selectedCount! - 1
         return { ...selectedProduct, selectedCount }
       })(productions)
@@ -65,8 +77,9 @@ export const useSelectProducts = () => {
 
   // 商品数が0の商品を取り除いた配列を返す
   const _removeZeroSelectedCountProduct = filter<ProductType>(
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     (product: ProductType) => product.selectedCount! >= 1
   )
 
-  return [carts, { addCart, removeCart }] as const
+  return [carts, { addCart, removeCart }]
 }
