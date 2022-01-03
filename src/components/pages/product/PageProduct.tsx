@@ -18,11 +18,11 @@ const PageProduct: VFC = () => {
           </div>
         </div>
       </div>
-      {carts.length ? (
+      {carts.length && (
         <div style={{ width: '20%', height: '100vh', borderLeft: '1px solid' }}>
           <CartList showAddButton={false} />
         </div>
-      ) : null}
+      )}
     </div>
   )
 }
