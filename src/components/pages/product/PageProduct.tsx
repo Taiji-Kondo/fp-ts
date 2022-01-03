@@ -3,6 +3,7 @@ import { ProductList } from '../../product/ProductList'
 import { CartList } from '../../product/CartList'
 import { useSelectProducts } from '../../../hooks/useSelectProducts'
 import { Link } from 'react-router-dom'
+import {Button} from "@chakra-ui/react";
 
 const PageProduct: VFC = () => {
   const [carts, { addCart }] = useSelectProducts()
@@ -14,7 +15,11 @@ const PageProduct: VFC = () => {
 
         <div style={{ marginTop: '100px' }}>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Link to="/product/cart">BUY</Link>
+            <Link to="/product/cart">
+              <Button>
+                BUY
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

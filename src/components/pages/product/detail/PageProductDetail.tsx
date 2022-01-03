@@ -1,6 +1,7 @@
 import { VFC } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { PRODUCTS } from '../../../../constants/Products'
+import {Button} from "@chakra-ui/react";
 
 const PageProductDetail: VFC = () => {
   const { id } = useParams<{ id: string }>()
@@ -22,7 +23,11 @@ const PageProductDetail: VFC = () => {
       ) : (
         <p>This product is not found.</p>
       )}
-      <Link to="/product">BACK</Link>
+      <Link to="/product">
+        <Button>
+          BACK
+        </Button>
+      </Link>
     </article>
   )
 }

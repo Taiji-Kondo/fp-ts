@@ -1,5 +1,6 @@
 import { VFC } from 'react'
 import { Link } from 'react-router-dom'
+import {Button} from "@chakra-ui/react";
 
 const PageHome: VFC = () => {
   return (
@@ -7,7 +8,11 @@ const PageHome: VFC = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/product">Product</Link>
+            <Link to="/product">
+              <Button>
+                Product
+              </Button>
+            </Link>
           </li>
         </ul>
       </nav>

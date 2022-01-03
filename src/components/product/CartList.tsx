@@ -1,6 +1,7 @@
 import { memo, VFC } from 'react'
 import { useSelectProducts } from '../../hooks/useSelectProducts'
 import { ShowButtonType } from '../../types/ShowButtonType'
+import {Button} from "@chakra-ui/react";
 
 type CartListPropsType = ShowButtonType
 
@@ -19,14 +20,14 @@ export const CartList: VFC<Partial<CartListPropsType>> = memo(
                     {cart.name} x{cart.selectedCount}
                   </p>
                   {showAddButton && (
-                    <button type="button" onClick={() => addCart(cart)}>
+                    <Button type="button" onClick={() => addCart(cart)}>
                       ADD
-                    </button>
+                    </Button>
                   )}
                   {showRemoveButton && (
-                    <button type="button" onClick={() => removeCart(cart)}>
+                    <Button type="button" onClick={() => removeCart(cart)}>
                       REMOVE
-                    </button>
+                    </Button>
                   )}
                 </li>
               )

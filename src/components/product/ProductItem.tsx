@@ -1,6 +1,7 @@
 import { memo, VFC } from 'react'
 import { Link } from 'react-router-dom'
 import { ProductType } from '../../types/product/ProductType'
+import {Button} from "@chakra-ui/react";
 
 type ProductItemPropsType = {
   product: ProductType
@@ -15,17 +16,21 @@ export const ProductItem: VFC<ProductItemPropsType> = memo(
         <h1>NAME: {product.name}</h1>
         <span>PRICE: {product.price}</span>
         {onClickAddButton && (
-          <button type="button" onClick={() => onClickAddButton(product)}>
+          <Button type="button" onClick={() => onClickAddButton(product)}>
             ADD
-          </button>
+          </Button>
         )}
         {onClickRemoveButton && (
-          <button type="button" onClick={() => onClickRemoveButton(product)}>
+          <Button type="button" onClick={() => onClickRemoveButton(product)}>
             REMOVE
-          </button>
+          </Button>
         )}
         <div>
-          <Link to={`/product/${product.id}`}>Show Detail</Link>
+          <Link to={`/product/${product.id}`}>
+            <Button>
+              Show Detail
+            </Button>
+          </Link>
         </div>
       </article>
     )
